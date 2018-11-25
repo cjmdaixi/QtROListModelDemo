@@ -4,6 +4,12 @@
 #include <QRemoteObjectNode>
 #include <QAbstractItemModelReplica>
 #include <QtDebug>
+enum AddressDataRoles{
+    NameRole = Qt::UserRole + 1,
+    SeniorityRole,
+    TitleRole,
+    AddressRole
+};
 
 int main(int argc, char *argv[])
 {
@@ -15,7 +21,9 @@ int main(int argc, char *argv[])
 
     QRemoteObjectNode node;
     node.connectToNode(QUrl("local:addressbook"));
-    auto addressBookModel = node.acquireModel("AddressBookModel");
+    QVector<int> roles = QVector<int>{NameRole, SeniorityRole, TitleRole, AddressRole};
+
+    auto addressBookModel = node.acquireModel("AddressBookModel", QtRemoteObjects::PrefetchData, roles);
     engine.rootContext()->setContextProperty("addressBookModel", addressBookModel);
 
     QObject::connect(addressBookModel, &QAbstractItemModelReplica::initialized, &app, [&]{
