@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("addressBookModel", &addressBookModel);
 
     QRemoteObjectHost host(QUrl("local:addressbook"));
-    host.enableRemoting(&addressBookModel, "AddressBookModel");
+    host.enableRemoting(&addressBookModel, "AddressBookModel", addressBookModel.roles());
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

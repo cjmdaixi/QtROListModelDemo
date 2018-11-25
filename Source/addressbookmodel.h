@@ -1,6 +1,7 @@
 #ifndef ADDRESSBOOKMODEL_H
 #define ADDRESSBOOKMODEL_H
 #include <QAbstractListModel>
+#include <QAbstractItemModelReplica>
 #include <QList>
 
 struct AddressData{
@@ -31,6 +32,7 @@ signals:
 
 public slots:
     void addTestData();
+    QVector<int> roles() const;
     QVariantMap item(int idx) const;
     void remove(const int idx);
     void modify(const int idx,

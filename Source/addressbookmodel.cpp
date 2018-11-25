@@ -64,6 +64,11 @@ void AddressBookModel::addTestData()
     endInsertRows();
 }
 
+QVector<int> AddressBookModel::roles() const
+{
+    return QVector<int>{NameRole, SeniorityRole, TitleRole, AddressRole};
+}
+
 QVariantMap AddressBookModel::item(int idx) const
 {
     if(idx < 0 || idx >= m_addresses.size())
